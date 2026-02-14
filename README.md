@@ -75,12 +75,11 @@ Listen to KugelAudio's diverse voice capabilities across different speaking styl
 
 | Sample | Description | Audio Player |
 |--------|-------------|--------------|
-| **Whispering** | Soft whispering voice | <audio controls><source src="https://huggingface.co/kugelaudio/kugelaudio-0-open/resolve/main/samples/258_Lukas_der_Flüsterer.wav" type="audio/wav"></audio> |
-| **Female Narrator** | Professional female reader voice | <audio controls><source src="https://huggingface.co/kugelaudio/kugelaudio-0-open/resolve/main/samples/266_Petra_die_Vorleserin.wav" type="audio/wav"></audio> |
-| **Angry Voice** | Irritated and frustrated speech | <audio controls><source src="https://huggingface.co/kugelaudio/kugelaudio-0-open/resolve/main/samples/261_Sauerer_Felix.wav" type="audio/wav"></audio> |
-| **Radio Announcer** | Professional radio broadcast voice | <audio controls><source src="https://huggingface.co/kugelaudio/kugelaudio-0-open/resolve/main/samples/277_Radio_Lars.wav" type="audio/wav"></audio> |
+| **Radio Voice** | Professional radio announcer voice | <audio controls><source src="voices/samples/radio_voice.wav" type="audio/wav"></audio> |
+| **Angry Voice** | Irritated and frustrated speech | <audio controls><source src="voices/samples/angry.wav" type="audio/wav"></audio> |
+| **Old Lady** | Gentle elderly female voice | <audio controls><source src="voices/samples/old_lady.wav" type="audio/wav"></audio> |
 
-*All samples are generated using pre-encoded voice embeddings.*
+*All samples use pre-encoded voice embeddings optimized for German.*
 
 ### Training Details
 
