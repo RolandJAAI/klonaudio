@@ -1,0 +1,13 @@
+{
+  "tokenizer_class": "KugelAudioTextTokenizer",
+  "auto_map": {
+    "AutoTokenizer": ["kugelaudio_open.processors.text_tokenizer.KugelAudioTextTokenizer", null]
+  },
+  "model_max_length": 32768,
+  "unk_token": "<|endoftext|>",
+  "eos_token": "<|endoftext|>",
+  "pad_token": "<|endoftext|>",
+  "bos_token": null,
+  "add_prefix_space": false,
+  "clean_up_tokenization_spaces": false
+}

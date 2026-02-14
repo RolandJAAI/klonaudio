@@ -1,0 +1,23 @@
+{
+  "angry": {
+    "file": "angry.pt",
+    "name": "Angry",
+    "description": "Angry, frustrated voice",
+    "language": "de",
+    "sample": "samples/angry.wav"
+  },
+  "radio": {
+    "file": "radio.pt",
+    "name": "Radio",
+    "description": "Professional radio announcer voice",
+    "language": "de",
+    "sample": "samples/radio_voice.wav"
+  },
+  "old_lady": {
+    "file": "old_lady.pt",
+    "name": "Old Lady",
+    "description": "Gentle elderly female voice",
+    "language": "de",
+    "sample": "samples/old_lady.wav"
+  }
+}
