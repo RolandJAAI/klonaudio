@@ -73,11 +73,11 @@ Listen to KugelAudio's diverse voice capabilities across different speaking styl
 
 ### German Voice Samples
 
-| Sample | Description | Audio Player |
-|--------|-------------|--------------|
-| **Radio Voice** | Professional radio announcer voice | <audio controls><source src="voices/samples/radio_voice.wav" type="audio/wav"></audio> |
-| **Angry Voice** | Irritated and frustrated speech | <audio controls><source src="voices/samples/angry.wav" type="audio/wav"></audio> |
-| **Old Lady** | Gentle elderly female voice | <audio controls><source src="voices/samples/old_lady.wav" type="audio/wav"></audio> |
+| Sample | Description | Audio |
+|--------|-------------|-------|
+| **Radio Voice** | Professional radio announcer voice | [▶️ Play](https://github.com/RolandJAAI/klonaudio/raw/main/voices/samples/radio_voice.wav) |
+| **Angry Voice** | Irritated and frustrated speech | [▶️ Play](https://github.com/RolandJAAI/klonaudio/raw/main/voices/samples/angry.wav) |
+| **Old Lady** | Gentle elderly female voice | [▶️ Play](https://github.com/RolandJAAI/klonaudio/raw/main/voices/samples/old_lady.wav) |
 
 *All samples use pre-encoded voice embeddings optimized for German.*
 
