@@ -288,8 +288,8 @@ class TestVoiceReuse:
             voices_dir=VOICES_DIR,
         )
 
-        cache1 = processor.load_voice_cache("default")
-        cache2 = processor.load_voice_cache("default")
+        cache1 = processor.load_voice_cache("radio")
+        cache2 = processor.load_voice_cache("radio")
 
         assert torch.equal(cache1["acoustic_mean"], cache2["acoustic_mean"]), (
             "Loading the same voice twice should yield identical tensors"
@@ -307,7 +307,7 @@ class TestProcessorModelIntegration:
     def test_processor_output_keys_for_voice_cache(self, processor_with_mock_tokenizer):
         """Processor output with voice= should have keys that the model's generate() accepts."""
         result = processor_with_mock_tokenizer(
-            text="Hello world", voice="default", return_tensors="pt"
+            text="Hello world", voice="radio", return_tensors="pt"
         )
 
         # These are the keys that generate() expects
@@ -340,7 +340,7 @@ class TestProcessorModelIntegration:
     def test_speech_input_mask_shape_matches_text_ids(self, processor_with_mock_tokenizer):
         """speech_input_mask should have same shape as text_ids."""
         result = processor_with_mock_tokenizer(
-            text="Hello world", voice="default", return_tensors="pt"
+            text="Hello world", voice="radio", return_tensors="pt"
         )
         assert result["speech_input_mask"].shape == result["text_ids"].shape, (
             f"speech_input_mask shape {result['speech_input_mask'].shape} "
@@ -359,7 +359,7 @@ class TestEncodeVoicePromptRealModel:
 
     def test_encode_voice_from_sample_wav(self):
         """Encode a real WAV file through the model's encoders."""
-        sample_wav = os.path.join(VOICES_DIR, "samples", "default.wav")
+        sample_wav = os.path.join(VOICES_DIR, "samples", "radio_voice.wav")
         if not os.path.exists(sample_wav):
             pytest.skip("Sample WAV not found")
 
@@ -378,7 +378,7 @@ class TestEncodeVoicePromptRealModel:
 
         processor = KugelAudioProcessor.from_pretrained(PROJECT_ROOT)
 
-        inputs = processor(text="Hello world", voice="default", return_tensors="pt")
+        inputs = processor(text="Hello world", voice="radio", return_tensors="pt")
         output = model.generate(
             text_ids=inputs["text_ids"],
             voice_cache=inputs.get("voice_cache"),
@@ -392,7 +392,7 @@ class TestEncodeVoicePromptRealModel:
 
     def test_full_pipeline_with_voice_prompt(self):
         """Full pipeline with voice_prompt (raw audio cloning)."""
-        sample_wav = os.path.join(VOICES_DIR, "samples", "default.wav")
+        sample_wav = os.path.join(VOICES_DIR, "samples", "radio_voice.wav")
         if not os.path.exists(sample_wav):
             pytest.skip("Sample WAV not found")
 
@@ -462,10 +462,10 @@ class TestMultilingualVoices:
     def test_same_voice_different_texts(self, processor_with_mock_tokenizer):
         """Same voice should work with different text inputs."""
         result_en = processor_with_mock_tokenizer(
-            text="Hello world", voice="default", return_tensors="pt"
+            text="Hello world", voice="radio", return_tensors="pt"
         )
         result_de = processor_with_mock_tokenizer(
-            text="Hallo Welt", voice="default", return_tensors="pt"
+            text="Hallo Welt", voice="radio", return_tensors="pt"
         )
 
         # Both should have voice_cache
@@ -474,16 +474,16 @@ class TestMultilingualVoices:
 
     def test_different_voices_same_text(self, processor_with_mock_tokenizer):
         """Different voices should produce different voice_cache dicts."""
-        result_default = processor_with_mock_tokenizer(
-            text="Hello", voice="default", return_tensors="pt"
+        result_radio = processor_with_mock_tokenizer(
+            text="Hello", voice="radio", return_tensors="pt"
         )
-        result_warm = processor_with_mock_tokenizer(
-            text="Hello", voice="warm", return_tensors="pt"
+        result_angry = processor_with_mock_tokenizer(
+            text="Hello", voice="angry", return_tensors="pt"
         )
 
-        assert "voice_cache" in result_default
-        assert "voice_cache" in result_warm
+        assert "voice_cache" in result_radio
+        assert "voice_cache" in result_angry
         # The caches should not be the same object
-        assert result_default["voice_cache"] is not result_warm["voice_cache"], (
+        assert result_radio["voice_cache"] is not result_angry["voice_cache"], (
             "Different voices should produce different cache objects"
         )

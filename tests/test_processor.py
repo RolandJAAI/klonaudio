@@ -67,7 +67,7 @@ class TestGetAvailableVoices:
     def test_default_voices_present(self, processor):
         """All three default voices should be available."""
         voices = processor.get_available_voices()
-        for name in ["default", "warm", "clear"]:
+        for name in ["radio", "angry", "old_lady"]:
             assert name in voices, f"Voice '{name}' should be available"
 
     def test_empty_registry_returns_empty(self, processor_no_voices):
@@ -84,22 +84,22 @@ class TestGetAvailableVoices:
 class TestLoadVoiceCache:
     """Tests for load_voice_cache() method."""
 
-    def test_load_default_voice(self, processor):
-        """Should successfully load the 'default' voice."""
-        cache = processor.load_voice_cache("default")
+    def test_load_radio_voice(self, processor):
+        """Should successfully load the 'radio' voice."""
+        cache = processor.load_voice_cache("radio")
         assert "acoustic_mean" in cache, "Loaded voice must contain 'acoustic_mean'"
         assert isinstance(cache["acoustic_mean"], torch.Tensor), (
             "acoustic_mean should be a tensor"
         )
 
-    def test_load_warm_voice(self, processor):
-        """Should successfully load the 'warm' voice."""
-        cache = processor.load_voice_cache("warm")
+    def test_load_angry_voice(self, processor):
+        """Should successfully load the 'angry' voice."""
+        cache = processor.load_voice_cache("angry")
         assert "acoustic_mean" in cache, "Loaded voice must contain 'acoustic_mean'"
 
-    def test_load_clear_voice(self, processor):
-        """Should successfully load the 'clear' voice."""
-        cache = processor.load_voice_cache("clear")
+    def test_load_old_lady_voice(self, processor):
+        """Should successfully load the 'old_lady' voice."""
+        cache = processor.load_voice_cache("old_lady")
         assert "acoustic_mean" in cache, "Loaded voice must contain 'acoustic_mean'"
 
     def test_unknown_voice_raises_error(self, processor):
@@ -109,7 +109,7 @@ class TestLoadVoiceCache:
 
     def test_unknown_voice_shows_available(self, processor):
         """Error message for unknown voice should list available voices."""
-        with pytest.raises(ValueError, match="default"):
+        with pytest.raises(ValueError, match="radio"):
             processor.load_voice_cache("nonexistent_voice")
 
 
@@ -121,9 +121,9 @@ class TestLoadVoiceCache:
 class TestProcessorVoiceParam:
     """Tests for using voice= (named voice) parameter."""
 
-    def test_voice_default_returns_voice_cache(self, processor):
-        """Using voice='default' should return voice_cache in the result."""
-        result = processor(text="Hello world", voice="default", return_tensors="pt")
+    def test_voice_radio_returns_voice_cache(self, processor):
+        """Using voice='radio' should return voice_cache in the result."""
+        result = processor(text="Hello world", voice="radio", return_tensors="pt")
         assert "voice_cache" in result, (
             "Result should contain 'voice_cache' when voice= is used"
         )
@@ -133,14 +133,14 @@ class TestProcessorVoiceParam:
 
     def test_voice_does_not_return_speech_tensors(self, processor):
         """Using voice= should NOT return speech_tensors (it returns voice_cache instead)."""
-        result = processor(text="Hello world", voice="default", return_tensors="pt")
+        result = processor(text="Hello world", voice="radio", return_tensors="pt")
         assert "speech_tensors" not in result, (
             "voice= should not produce speech_tensors"
         )
 
     def test_voice_produces_text_ids(self, processor):
         """Result should always contain text_ids."""
-        result = processor(text="Hello world", voice="default", return_tensors="pt")
+        result = processor(text="Hello world", voice="radio", return_tensors="pt")
         assert "text_ids" in result, "Result must contain 'text_ids'"
         assert isinstance(result["text_ids"], torch.Tensor), (
             "text_ids should be a tensor when return_tensors='pt'"
@@ -148,13 +148,13 @@ class TestProcessorVoiceParam:
 
     def test_voice_produces_speech_input_mask(self, processor):
         """Result should always contain speech_input_mask."""
-        result = processor(text="Hello world", voice="default", return_tensors="pt")
+        result = processor(text="Hello world", voice="radio", return_tensors="pt")
         assert "speech_input_mask" in result, "Result must contain 'speech_input_mask'"
         assert isinstance(result["speech_input_mask"], torch.Tensor)
 
     def test_speech_input_mask_has_true_values(self, processor):
         """speech_input_mask should have True values where voice tokens are placed."""
-        result = processor(text="Hello world", voice="default", return_tensors="pt")
+        result = processor(text="Hello world", voice="radio", return_tensors="pt")
         mask = result["speech_input_mask"]
         assert mask.any(), "speech_input_mask should have at least one True value for voice tokens"
 
@@ -328,7 +328,7 @@ class TestParameterPriority:
         """When both voice_cache and voice are provided, voice_cache wins."""
         result = processor(
             text="Hello world",
-            voice="default",
+            voice="radio",
             voice_cache=voice_cache_full,
             return_tensors="pt",
         )
@@ -354,7 +354,7 @@ class TestParameterPriority:
         """When both voice and voice_prompt are provided, voice wins (loaded as voice_cache)."""
         result = processor(
             text="Hello world",
-            voice="default",
+            voice="radio",
             voice_prompt=sample_audio_tensor,
             return_tensors="pt",
         )
@@ -369,7 +369,7 @@ class TestParameterPriority:
         """When all three are provided, voice_cache takes highest priority."""
         result = processor(
             text="Hello world",
-            voice="default",
+            voice="radio",
             voice_cache=voice_cache_full,
             voice_prompt=sample_audio_tensor,
             return_tensors="pt",

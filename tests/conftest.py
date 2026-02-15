@@ -141,29 +141,26 @@ def mock_tokenizer():
 def voices_registry():
     """Return the standard voices registry dict."""
     return {
-        "default": {
-            "file": "default.pt",
-            "description": "Default neutral voice",
-            "language": "en",
-            "gender": "neutral",
-            "source": "generated",
-            "encoded_with": "kugelaudio-0-open",
+        "radio": {
+            "file": "radio.pt",
+            "name": "Radio",
+            "description": "Professional radio announcer voice",
+            "language": "de",
+            "sample": "samples/radio_voice.wav",
         },
-        "warm": {
-            "file": "warm.pt",
-            "description": "Warm, friendly voice",
-            "language": "en",
-            "gender": "neutral",
-            "source": "generated",
-            "encoded_with": "kugelaudio-0-open",
+        "angry": {
+            "file": "angry.pt",
+            "name": "Angry",
+            "description": "Angry, frustrated voice",
+            "language": "de",
+            "sample": "samples/angry.wav",
         },
-        "clear": {
-            "file": "clear.pt",
-            "description": "Clear, professional voice",
-            "language": "en",
-            "gender": "neutral",
-            "source": "generated",
-            "encoded_with": "kugelaudio-0-open",
+        "old_lady": {
+            "file": "old_lady.pt",
+            "name": "Old Lady",
+            "description": "Gentle elderly female voice",
+            "language": "de",
+            "sample": "samples/old_lady.wav",
         },
     }
 
