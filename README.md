@@ -141,31 +141,55 @@ Get started with KlonAudio quickly using our documentation:
 - CUDA (recommended for GPU acceleration, automatic fallback to MPS or CPU if not available)
 - [uv](https://docs.astral.sh/uv/) (recommended package manager)
 
-#### Install uv
+#### Step 1: Install Required Tools
 
 ```bash
-# macOS/Linux
+# Install uv package manager (macOS/Linux)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Windows (PowerShell)
+# Or for Windows (PowerShell)
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-# Or via pip
-pip install uv
+# Install git-xet for faster model downloads (https://hf.co/docs/hub/git-xet)
+brew install git-xet
+git xet install
+
+# Install HuggingFace CLI
+curl -LsSf https://hf.co/cli/install.sh | bash
 ```
 
-#### Installation
+#### Step 2: Download the Model
+
+⚠️ **Important:** The model is **18GB**. Pre-download it for faster, more reliable setup.
+
+```bash
+# Authenticate with HuggingFace (get token from https://huggingface.co/settings/tokens)
+hf auth login --token <your-token>
+
+# Download the model from HuggingFace
+hf download Roland-JAAI/klonaudio
+```
+
+This downloads the model to your HuggingFace cache (~/.cache/huggingface/). Subsequent runs will use the cached files.
+
+**Alternative:** Clone without large files, then download:
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/Roland-JAAI/klonaudio
+hf download Roland-JAAI/klonaudio
+```
+
+#### Step 3: Clone and Run
 
 ```bash
 # Clone the repository
 git clone https://github.com/RolandJAAI/klonaudio.git
 cd klonaudio
 
-# Run directly with uv (recommended - handles all dependencies automatically)
+# Run directly with uv (handles all dependencies automatically)
 uv run python start.py
 ```
 
-That's it! The `uv run` command will automatically create a virtual environment and install all dependencies.
+That's it! The `uv run` command will automatically create a virtual environment and install all dependencies. The model will load from your HuggingFace cache.
 
 ### Launch Web Interface
 
