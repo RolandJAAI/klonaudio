@@ -43,7 +43,7 @@ Examples:
     gen_parser.add_argument(
         "-v", "--voice", help="Pre-encoded voice name (from voices.json registry)"
     )
-    gen_parser.add_argument("--model", default="kugelaudio/kugelaudio-0-open", help="Model ID")
+    gen_parser.add_argument("--model", default="Roland-JAAI/klonaudio", help="Model ID")
     gen_parser.add_argument("--cfg-scale", type=float, default=3.0, help="Guidance scale")
 
     # Verify command

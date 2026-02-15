@@ -11,8 +11,8 @@ Voice input methods (in priority order):
 
 Example:
     >>> from kugelaudio_open import KugelAudioForConditionalGenerationInference, KugelAudioProcessor
-    >>> model = KugelAudioForConditionalGenerationInference.from_pretrained("kugelaudio/kugelaudio-0-open")
-    >>> processor = KugelAudioProcessor.from_pretrained("kugelaudio/kugelaudio-0-open")
+    >>> model = KugelAudioForConditionalGenerationInference.from_pretrained("Roland-JAAI/klonaudio")
+    >>> processor = KugelAudioProcessor.from_pretrained("Roland-JAAI/klonaudio")
     >>> inputs = processor(text="Hello world!", voice="default", return_tensors="pt")
 """
 

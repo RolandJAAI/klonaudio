@@ -64,8 +64,8 @@ Examples:
     parser.add_argument(
         "--model",
         "-m",
-        default="kugelaudio/kugelaudio-0-open",
-        help="Model ID or path to load (default: kugelaudio/kugelaudio-0-open).",
+        default="Roland-JAAI/klonaudio",
+        help="Model ID or path to load (default: Roland-JAAI/klonaudio).",
     )
     parser.add_argument(
         "--name",

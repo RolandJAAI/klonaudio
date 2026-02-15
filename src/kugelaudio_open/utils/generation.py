@@ -6,7 +6,7 @@ import torch
 
 
 def load_model_and_processor(
-    model_name_or_path: str = "kugelaudio/kugelaudio-0-open",
+    model_name_or_path: str = "Roland-JAAI/klonaudio",
     device: Optional[Union[str, torch.device]] = None,
     torch_dtype: Optional[torch.dtype] = None,
     use_flash_attention: bool = True,
@@ -23,7 +23,7 @@ def load_model_and_processor(
         Tuple of (model, processor)
 
     Example:
-        >>> model, processor = load_model_and_processor("kugelaudio/kugelaudio-0-open")
+        >>> model, processor = load_model_and_processor("Roland-JAAI/klonaudio")
     """
     from kugelaudio_open.models import KugelAudioForConditionalGenerationInference
     from kugelaudio_open.processors import KugelAudioProcessor

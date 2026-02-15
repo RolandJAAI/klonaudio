@@ -39,7 +39,7 @@ Examples:
   # Generate speech from command line
   python start.py generate "Hello world!" -o output.wav
   python start.py generate "Clone my voice" -r reference.wav -o cloned.wav
-  python start.py generate "Premium quality" --model kugelaudio/kugelaudio-0-open -o premium.wav
+  python start.py generate "Premium quality" --model Roland-JAAI/klonaudio -o premium.wav
   
   # Verify watermark in audio
   python start.py verify audio.wav
@@ -53,14 +53,14 @@ Examples:
     ui_parser.add_argument("--share", action="store_true", help="Create public share link")
     ui_parser.add_argument("--host", default="127.0.0.1", help="Server hostname (use 0.0.0.0 for network access)")
     ui_parser.add_argument("--port", type=int, default=7860, help="Server port")
-    ui_parser.add_argument("--model", default="kugelaudio/kugelaudio-0-open", help="Default model to load")
+    ui_parser.add_argument("--model", default="Roland-JAAI/klonaudio", help="Default model to load")
 
     # Generate command
     gen_parser = subparsers.add_parser("generate", help="Generate speech from text")
     gen_parser.add_argument("text", help="Text to synthesize")
     gen_parser.add_argument("-o", "--output", default="output.wav", help="Output file path")
     gen_parser.add_argument("-r", "--reference", help="Reference audio for voice cloning")
-    gen_parser.add_argument("--model", default="kugelaudio/kugelaudio-0-open", help="Model ID")
+    gen_parser.add_argument("--model", default="Roland-JAAI/klonaudio", help="Model ID")
     gen_parser.add_argument("--cfg-scale", type=float, default=3.0, help="Guidance scale (1.0-10.0)")
     gen_parser.add_argument("--max-tokens", type=int, default=4096, help="Maximum generation tokens")
 
@@ -76,7 +76,7 @@ Examples:
         args.share = False
         args.host = "127.0.0.1"
         args.port = 7860
-        args.model = "kugelaudio/kugelaudio-0-open"
+        args.model = "Roland-JAAI/klonaudio"
 
     if args.command == "ui":
         print("🎙️ Starting KugelAudio Web Interface...")

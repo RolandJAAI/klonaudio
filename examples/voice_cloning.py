@@ -23,7 +23,7 @@ def main():
     # ------------------------------------------------------------------ #
     # Setup                                                                #
     # ------------------------------------------------------------------ #
-    model_id = "kugelaudio/kugelaudio-0-open"
+    model_id = "Roland-JAAI/klonaudio"
     # Use MPS on Apple Silicon, CUDA on NVIDIA, or CPU as fallback
     if torch.cuda.is_available():
         device = "cuda"

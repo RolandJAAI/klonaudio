@@ -31,7 +31,7 @@ class KugelAudioProcessor:
     3. voice_prompt: Raw audio file or tensor for voice cloning
 
     Example:
-        >>> processor = KugelAudioProcessor.from_pretrained("kugelaudio/kugelaudio-0-open")
+        >>> processor = KugelAudioProcessor.from_pretrained("Roland-JAAI/klonaudio")
         >>> inputs = processor(text="Hello world", voice="default")
         >>> inputs = processor(text="Hello world", voice_prompt="speaker.wav")
     """

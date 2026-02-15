@@ -127,7 +127,7 @@ def _warmup_model(model, processor=None):
         torch.cuda.empty_cache()
 
 
-def load_models(model_id: str = "kugelaudio/kugelaudio-0-open"):
+def load_models(model_id: str = "Roland-JAAI/klonaudio"):
     """Load model and processor. Switches model if a different model_id is requested."""
     global _model, _processor, _watermark, _current_model_id
 
@@ -567,7 +567,7 @@ def launch_app(
         def load_model_background():
             print("🔄 Loading model in background...")
             try:
-                load_models("kugelaudio/kugelaudio-0-open")
+                load_models("Roland-JAAI/klonaudio")
                 print("✅ Model loaded and ready!")
             except Exception as e:
                 print(f"❌ Error loading model: {e}")

@@ -109,13 +109,13 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
 
 model = KugelAudioForConditionalGenerationInference.from_pretrained(
-    "kugelaudio/kugelaudio-0-open", torch_dtype=dtype,
+    "Roland-JAAI/klonaudio", torch_dtype=dtype,
 ).to(device)
 model.eval()
 
 # NOTE: Do NOT call strip_encoders() -- encoders are needed for voice_prompt.
 
-processor = KugelAudioProcessor.from_pretrained("kugelaudio/kugelaudio-0-open")
+processor = KugelAudioProcessor.from_pretrained("Roland-JAAI/klonaudio")
 
 inputs = processor(
     text="Hello, this is a cloned voice.",
@@ -238,7 +238,7 @@ python scripts/create_voice.py \
 |------|-------|-------------|---------|
 | `--input` | `-i` | Path to the input audio file (WAV, MP3, FLAC, etc.) | *required* |
 | `--output` | `-o` | Path for the output `.pt` voice file | *required* |
-| `--model` | `-m` | Model ID or local path to load | `kugelaudio/kugelaudio-0-open` |
+| `--model` | `-m` | Model ID or local path to load | `Roland-JAAI/klonaudio` |
 | `--name` | `-n` | Human-readable name for this voice | Derived from filename |
 | `--description` | `-d` | Description of voice characteristics | `""` |
 | `--language` | `-l` | Language code for the voice | `en` |
@@ -309,7 +309,7 @@ Call `strip_encoders()` to remove the encoder weights:
 
 ```python
 model = KugelAudioForConditionalGenerationInference.from_pretrained(
-    "kugelaudio/kugelaudio-0-open", torch_dtype=torch.bfloat16,
+    "Roland-JAAI/klonaudio", torch_dtype=torch.bfloat16,
 ).to("cuda")
 model.eval()
 
@@ -374,7 +374,7 @@ from kugelaudio_open import (
     KugelAudioProcessor,
 )
 
-model_id = "kugelaudio/kugelaudio-0-open"
+model_id = "Roland-JAAI/klonaudio"
 device = "cuda"
 dtype = torch.bfloat16
 

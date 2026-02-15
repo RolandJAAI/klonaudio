@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://huggingface.co/kugelaudio/kugelaudio-0-open"><img src="https://img.shields.io/badge/🤗-Hugging_Face_Model-blue" alt="HuggingFace Model"></a>
+  <a href="https://huggingface.co/Roland-JAAI/klonaudio"><img src="https://img.shields.io/badge/🤗-Hugging_Face_Model-blue" alt="HuggingFace Model"></a>
   <a href="https://github.com/RolandJAAI/klonaudio"><img src="https://img.shields.io/badge/GitHub-Repository-black" alt="GitHub Repository"></a>
 </p>
 
@@ -210,12 +210,12 @@ import torch
 device = "cuda" if torch.cuda.is_available() else "cpu"
 dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
 model = KugelAudioForConditionalGenerationInference.from_pretrained(
-    "kugelaudio/kugelaudio-0-open",
+    "Roland-JAAI/klonaudio",
     torch_dtype=dtype,
 ).to(device)
 model.eval()
 
-processor = KugelAudioProcessor.from_pretrained("kugelaudio/kugelaudio-0-open")
+processor = KugelAudioProcessor.from_pretrained("Roland-JAAI/klonaudio")
 
 # See available voices
 print(processor.get_available_voices())  # ["angry", "radio", "old_lady"]
@@ -355,7 +355,7 @@ print(f"Confidence: {result.confidence:.1%}")
 
 | Model | Parameters | Quality | RTF | Speed | VRAM |
 |-------|------------|---------|-----|-------|------|
-| [kugelaudio-0-open](https://huggingface.co/kugelaudio/kugelaudio-0-open) | 7B | Best | 1.00 | 1.0x realtime | ~19GB |
+| [kugelaudio-0-open](https://huggingface.co/Roland-JAAI/klonaudio) | 7B | Best | 1.00 | 1.0x realtime | ~19GB |
 
 *RTF = Real-Time Factor (generation time / audio duration). Lower is faster.*
 ## Architecture

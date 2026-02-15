@@ -191,7 +191,7 @@ class KugelAudioConfig(PretrainedConfig):
 
     Example:
         >>> from kugelaudio import KugelAudioConfig
-        >>> config = KugelAudioConfig.from_pretrained("kugelaudio/kugelaudio-0-open")
+        >>> config = KugelAudioConfig.from_pretrained("Roland-JAAI/klonaudio")
     """
 
     model_type = "kugelaudio"
