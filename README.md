@@ -1,7 +1,7 @@
 <h1 align="center">🎙️ KlonAudio</h1>
 
 <p align="center">
-  <strong>Open-source text-to-speech for European languages with full voice cloning</strong><br>
+  <strong>🇪🇺 Open-source text-to-speech for European languages with restored voice cloning</strong><br>
   Powered by an AR + Diffusion architecture
 </p>
 
@@ -33,15 +33,15 @@
 
 **Open-source text-to-speech models for European languages are significantly lagging behind.** While English TTS has seen remarkable progress, speakers of German, French, Spanish, Polish, and dozens of other European languages have been underserved by the open-source community.
 
-KlonAudio builds on the excellent work by [KugelAudio](https://github.com/Kugelaudio/kugelaudio-open) and the [VibeVoice team at Microsoft](https://github.com/microsoft/VibeVoice), restoring the full voice cloning capabilities using approximately **200,000 hours** of highly pre-processed and enhanced speech data from the [YODAS2 dataset](https://huggingface.co/datasets/espnet/yodas).
+KlonAudio is restoring the full voice cloning capabilities and builds on the excellent work by [KugelAudio](https://github.com/Kugelaudio/kugelaudio-open) using approximately **200,000 hours** of highly pre-processed and enhanced speech data from the [YODAS2 dataset](https://huggingface.co/datasets/espnet/yodas), and the [VibeVoice team at Microsoft](https://github.com/microsoft/VibeVoice) for the base model.
 
 ## 🏆 Benchmark Results: Outperforming ElevenLabs
 
-**KugelAudio (base model) achieves state-of-the-art performance**, beating industry leaders including ElevenLabs in rigorous human preference testing. KlonAudio inherits this quality and adds full voice cloning capabilities.
+**KlonAudio uses the KugelAudio model, which achieves state-of-the-art performance**, beating industry leaders including ElevenLabs in rigorous human preference testing. KlonAudio inherits this quality and adds full voice cloning capabilities.
 
 ### Human Preference Benchmark (A/B Testing)
 
-We conducted extensive A/B testing with **339 human evaluations** to compare KugelAudio against leading TTS models. Participants listened to a reference voice sample, then compared outputs from two models and selected which sounded more human and closer to the original voice.
+Kugelaudio conducted extensive A/B testing with **339 human evaluations** to compare KugelAudio against leading TTS models. Participants listened to a reference voice sample, then compared outputs from two models and selected which sounded more human and closer to the original voice.
 
 ### German Language Evaluation
 
@@ -79,18 +79,18 @@ Listen to KugelAudio's diverse voice capabilities across different speaking styl
 | **Angry Voice** | Irritated and frustrated speech | [🔊 Download](https://github.com/RolandJAAI/klonaudio/raw/main/voices/samples/angry.wav) |
 | **Old Lady** | Gentle elderly female voice | [🔊 Download](https://github.com/RolandJAAI/klonaudio/raw/main/voices/samples/old_lady.wav) |
 
-*All samples use pre-encoded voice embeddings optimized for German. Click to download and play.*
+*All samples use pre-encoded voice embeddings of a German voice. Click to download and play. These samples were taken from the MIT licensed Huggingface repo of Kugelaudio*
 
 ### Training Details
 
 - **Base Model**: [Microsoft VibeVoice](https://github.com/microsoft/VibeVoice)
-- **Training Data**: ~200,000 hours from [YODAS2](https://huggingface.co/datasets/espnet/yodas)
+- **European Language Training Data**: ~200,000 hours from [YODAS2](https://huggingface.co/datasets/espnet/yodas)
 - **Hardware**: 8x NVIDIA H100 GPUs
 - **Training Duration**: 5 days
 
 ### Supported Languages
 
-KugelAudio supports **23 major European languages** with varying levels of quality based on dataset representation:
+KlonAudio supports **23 major European languages** with varying levels of quality based on dataset representation:
 
 | Language | Code | Flag | Language | Code | Flag | Language | Code | Flag |
 |----------|------|------|----------|------|------|----------|------|------|
@@ -107,14 +107,13 @@ KugelAudio supports **23 major European languages** with varying levels of quali
 
 ## 📖 Start Here
 
-Get started with KugelAudio quickly using our documentation:
+Get started with KlonAudio quickly using our documentation:
 
 | | |
 |---|---|
 | 📥 [**Installation**](#installation) | Set up KlonAudio on your machine |
 | 🎯 [**Quick Start**](#quick-start) | Generate your first speech in minutes |
 | 🎭 [**Voices**](#voices) | Clone voices or use pre-encoded speakers |
-| 📖 [**Voice Cloning Guide**](docs/VOICE_CLONING.md) | In-depth guide to voice cloning |
 | 🔒 [**Watermarking**](#audio-watermarking) | Verify AI-generated audio |
 | 📦 [**Models**](#models) | Available model variants and benchmarks |
 
@@ -137,9 +136,9 @@ Get started with KugelAudio quickly using our documentation:
 
 #### Prerequisites
 
-- Python 3.10 or higher
+- Python 3.10-3.12
 - PyTorch 2.0 or higher
-- CUDA (recommended for GPU acceleration)
+- CUDA (recommended for GPU acceleration, automatic fallback to MPS or CPU if not available)
 - [uv](https://docs.astral.sh/uv/) (recommended package manager)
 
 #### Install uv
@@ -181,13 +180,13 @@ uv run python start.py ui --share
 uv run python start.py ui --host 0.0.0.0 --port 8080
 ```
 
-Then open http://127.0.0.1:7860 in your browser.
+Then open http://127.0.0.1:7860 (or your set custom host/port) in your browser.
 
 ### Command Line Usage
 
 ```bash
 # Generate speech from text
-uv run python start.py generate "Hello, this is KugelAudio!" -o hello.wav
+uv run python start.py generate "Hello, this is a really good open source voice!" -o hello.wav
 
 # Clone a voice from a reference audio file
 uv run python start.py generate "Hello with a cloned voice!" -r speaker.wav -o cloned.wav
@@ -242,8 +241,6 @@ processor.save_audio(outputs.speech_outputs[0], "cloned.wav")
 > **Tip:** If you only use pre-encoded voices (not `voice_prompt`), call `model.model.strip_encoders()` after loading to save VRAM.
 
 ### Voices
-
-> **📖 For a comprehensive guide** including audio quality tips, production caching, multilingual notes, and troubleshooting, see the [Voice Cloning Guide](docs/VOICE_CLONING.md).
 
 KlonAudio supports three ways to control the speaker voice, listed here from simplest to most flexible:
 
@@ -427,7 +424,6 @@ KlonAudio would not exist without the outstanding work of:
 
 - **[KugelAudio Team](https://github.com/Kugelaudio/kugelaudio-open)** (Kajo Kratzenstein, Carlos Menke): For training the excellent base model and open-sourcing it under MIT license
 - **[Microsoft VibeVoice Team](https://github.com/microsoft/VibeVoice)**: For creating the original architecture with dual acoustic + semantic encoders
-- **[AI Service Center Berlin-Brandenburg](https://hpi.de/ki-servicezentrum/)**: For providing the GPU resources (8x H100) that made training the base model possible
 
 ### Supporting Technologies
 
@@ -451,29 +447,8 @@ KlonAudio would not exist without the outstanding work of:
 
 **Kajo Kratzenstein**
 📧 [kajo@kugelaudio.com](mailto:kajo@kugelaudio.com)
-🌐 [kugelaudio.com](https://kugelaudio.com)
 
 **Carlos Menke**
 
-## Citation
-
-```bibtex
-@software{klonaudio2026,
-  title = {KlonAudio: Open-Source Text-to-Speech with Voice Cloning for European Languages},
-  author = {Becker, Roland},
-  year = {2026},
-  organization = {JUST ADD AI GmbH},
-  url = {https://github.com/RolandJAAI/klonaudio},
-  note = {Fork of KugelAudio with restored voice cloning capabilities}
-}
-
-@software{kugelaudio2026,
-  title = {KugelAudio: Open-Source Text-to-Speech for European Languages},
-  author = {Kratzenstein, Kajo and Menke, Carlos},
-  year = {2026},
-  institution = {Hasso-Plattner-Institut},
-  url = {https://github.com/kugelaudio/kugelaudio}
-}
-```
 
 ---
