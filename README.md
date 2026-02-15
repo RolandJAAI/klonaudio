@@ -197,6 +197,8 @@ uv run python start.py verify audio.wav
 
 ### Python API
 
+> **Note on imports:** While the repository and package are named `klonaudio`, the Python module imports as `kugelaudio_open` to maintain compatibility with the original KugelAudio codebase. This is a common pattern in Python packaging (e.g., `pip install scikit-learn` but `import sklearn`).
+
 ```python
 from kugelaudio_open import (
     KugelAudioForConditionalGenerationInference,

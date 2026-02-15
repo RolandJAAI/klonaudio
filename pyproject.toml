@@ -3,15 +3,15 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "kugelaudio-open"
+name = "klonaudio"
 version = "0.1.0"
 authors = [
-    { name = "Kajo Kratzenstein", email = "kajo@kugelaudio.com" },
+    { name = "Roland Becker", email = "roland@jaai-group.com" },
 ]
 maintainers = [
-    { name = "Kajo Kratzenstein", email = "kajo@kugelaudio.com" },
+    { name = "Roland Becker", email = "roland@jaai-group.com" },
 ]
-description = "Open-source speech synthesis with AR + diffusion architecture"
+description = "Open-source text-to-speech for European languages with voice cloning (fork of KugelAudio)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -65,13 +65,13 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://kugelaudio.com"
-Documentation = "https://docs.kugelaudio.com"
-Repository = "https://github.com/kugelaudio/kugelaudio"
-API = "https://api.kugelaudio.com"
+Homepage = "https://github.com/RolandJAAI/klonaudio"
+Repository = "https://github.com/RolandJAAI/klonaudio"
+Documentation = "https://github.com/RolandJAAI/klonaudio#readme"
+Issues = "https://github.com/RolandJAAI/klonaudio/issues"
 
 [project.scripts]
-kugelaudio = "kugelaudio_open.cli:main"
+klonaudio = "kugelaudio_open.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
