@@ -192,7 +192,7 @@ def generate_speech(
     text: str,
     voice_name: Optional[str] = None,
     voice_audio: Optional[Tuple[int, np.ndarray]] = None,
-    model_choice: str = "kugelaudio-0-open",
+    model_choice: str = "Roland-JAAI/klonaudio",
     cfg_scale: float = 3.0,
     max_tokens: int = 2048,
 ) -> Tuple[int, np.ndarray]:
@@ -202,7 +202,7 @@ def generate_speech(
         text: Text to synthesize
         voice_name: Name of a pre-encoded voice (from voices.json registry)
         voice_audio: Audio for voice cloning (sample_rate, audio_array)
-        model_choice: Model variant to use
+        model_choice: Model ID to use
         cfg_scale: Classifier-free guidance scale
         max_tokens: Maximum generation tokens
 
@@ -215,7 +215,7 @@ def generate_speech(
     if not text.strip():
         raise gr.Error("Please enter some text to synthesize.")
 
-    model_id = f"kugelaudio/{model_choice}"
+    model_id = model_choice
     # Reuse cached model if already loaded
     model, processor, watermark = load_models(model_id)
     device = next(model.parameters()).device
@@ -406,8 +406,8 @@ def create_app(preload_model: bool = True) -> "gr.Blocks":
 
                         with gr.Accordion("Advanced Settings", open=False):
                             model_choice = gr.Dropdown(
-                                choices=["kugelaudio-0-open"],
-                                value="kugelaudio-0-open",
+                                choices=["Roland-JAAI/klonaudio"],
+                                value="Roland-JAAI/klonaudio",
                                 label="Model",
                             )
                             cfg_scale = gr.Slider(
@@ -501,10 +501,10 @@ def create_app(preload_model: bool = True) -> "gr.Blocks":
                   using [Facebook's AudioSeal](https://huggingface.co/facebook/audioseal) technology
                 
                 ### Models
-                
+
                 | Model | Parameters | Quality | Speed |
                 |-------|------------|---------|-------|
-                | kugelaudio-0-open | 7B | Best | Standard |
+                | Roland-JAAI/klonaudio | 7B | Best | Standard |
                 
                 ### Responsible Use
                 

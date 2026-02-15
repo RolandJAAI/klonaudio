@@ -379,7 +379,7 @@ print(f"Confidence: {result.confidence:.1%}")
 
 | Model | Parameters | Quality | RTF | Speed | VRAM |
 |-------|------------|---------|-----|-------|------|
-| [kugelaudio-0-open](https://huggingface.co/Roland-JAAI/klonaudio) | 7B | Best | 1.00 | 1.0x realtime | ~19GB |
+| [klonaudio](https://huggingface.co/Roland-JAAI/klonaudio) | 7B | Best | 1.00 | 1.0x realtime | ~19GB |
 
 *RTF = Real-Time Factor (generation time / audio duration). Lower is faster.*
 ## Architecture
