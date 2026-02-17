@@ -125,6 +125,8 @@ def _warmup_model(model, processor=None):
     # Clear memory
     if device.type == "cuda":
         torch.cuda.empty_cache()
+    elif device.type == "mps":
+        torch.mps.empty_cache()
 
 
 def load_models(model_id: str = "Roland-JAAI/klonaudio"):
@@ -147,9 +149,11 @@ def load_models(model_id: str = "Roland-JAAI/klonaudio"):
             del _processor
             _model = None
             _processor = None
-            # Clear CUDA cache to free memory
+            # Clear GPU cache to free memory
             if device == "cuda":
                 torch.cuda.empty_cache()
+            elif device == "mps":
+                torch.mps.empty_cache()
 
         print(f"Loading model {model_id} on {device}...")
         try:
@@ -172,9 +176,9 @@ def load_models(model_id: str = "Roland-JAAI/klonaudio"):
     if _processor is None:
         _processor = KugelAudioProcessor.from_pretrained(model_id)
 
-    # Warmup to eliminate first-generation slowness from CUDA kernel compilation
+    # Warmup to eliminate first-generation slowness from kernel compilation
     # Do this after processor is loaded so we can run a mini-generation
-    if device == "cuda" and _model is not None:
+    if device in ("cuda", "mps") and _model is not None:
         # Check if we need to warmup (only on first load)
         if not getattr(_model, "_warmed_up", False):
             print("Warming up model (this may take a moment)...")

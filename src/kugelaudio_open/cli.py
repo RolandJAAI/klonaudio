@@ -67,7 +67,12 @@ Examples:
         from kugelaudio_open.models import KugelAudioForConditionalGenerationInference
         from kugelaudio_open.processors import KugelAudioProcessor
 
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        if torch.cuda.is_available():
+            device = "cuda"
+        elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+            device = "mps"
+        else:
+            device = "cpu"
         dtype = torch.bfloat16 if device == "cuda" else torch.float32
 
         print(f"Loading model {args.model}...")

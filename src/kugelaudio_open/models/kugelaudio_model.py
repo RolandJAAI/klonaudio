@@ -189,9 +189,11 @@ class KugelAudioModel(KugelAudioPreTrainedModel):
             "Voice cloning from audio files is disabled."
         )
 
-        # Clear CUDA cache if available
+        # Clear GPU cache if available
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
+        elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+            torch.mps.empty_cache()
 
     def get_input_embeddings(self):
         if hasattr(self.language_model, "embed_tokens"):
@@ -244,7 +246,12 @@ class KugelAudioModel(KugelAudioPreTrainedModel):
             elif cache_position is not None:
                 device = cache_position.device
             else:
-                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                if torch.cuda.is_available():
+                    device = torch.device("cuda")
+                elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+                    device = torch.device("mps")
+                else:
+                    device = torch.device("cpu")
 
         min_dtype = torch.finfo(dtype).min
 

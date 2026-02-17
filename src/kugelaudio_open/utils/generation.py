@@ -30,11 +30,17 @@ def load_model_and_processor(
 
     # Auto-detect device
     if device is None:
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        if torch.cuda.is_available():
+            device = "cuda"
+        elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+            device = "mps"
+        else:
+            device = "cpu"
 
     # Auto-detect dtype
     if torch_dtype is None:
-        torch_dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+        # bfloat16 works well on CUDA, but MPS and CPU need float32
+        torch_dtype = torch.bfloat16 if device == "cuda" else torch.float32
 
     # Load model
     attn_impl = "flash_attention_2" if use_flash_attention else "sdpa"
